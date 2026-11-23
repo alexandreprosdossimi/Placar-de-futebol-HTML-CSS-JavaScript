@@ -1,0 +1,152 @@
+"<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missão placar digital interativo de futebol </title>
+</head>
+<body> 
+    
+    <style>
+    body {
+        background-image: url(https://i.pinimg.com/736x/02/a2/04/02a204585ab0bc3c75e2b6de5a97f175.jpg);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+
+    }
+    h1 {
+        color: #000000;
+        text-shadow: 4px 4px 8px rgba(102, 3, 3, 0.2);
+        text-align: center;
+        font-size: 50px;
+    }
+   div.msg {
+        text-align: center;
+        font-size: 30px;
+        color: #0c0268;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        margin-bottom: 50px;
+    }
+   div.conteiner {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+        margin-top: 40px;
+    }
+    .botaogol1, .botaogol2 {
+        background: #0889df;
+        color: rgb(248, 244, 0);
+        border: none;
+        padding: 30px 40px;
+        font-size: 20px;
+        cursor: pointer;
+        border-radius: 30px;
+        display: auto;
+    }
+   h2 {
+        color: #000000;
+        margin-bottom: 10px;
+        font-size: 30px;
+        text-align: center;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    p {
+        font-size: 30px;
+        font-weight: bold;
+        color: #fbff00;
+        margin: 15px 0;
+        text-align: center;
+    }
+    #reiniciar {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+ .botaoreset {
+    background: #f00;
+    color: #222;
+    border: none;
+    padding: 32px 50px;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}   
+
+button:hover {
+        background: #00b843;
+        transform: translateY(-2px);
+    }
+    button:active {
+        transform: translateY(2px);
+        box-shadow: 0 2px 0 #006d29;
+    }
+</style>
+    <h1>Placar de Futebol</h1>
+ <div id="mensagem" class="msg"></div>
+<div class="conteiner">
+ <div id="time1">
+    <h2>time 1</h2>
+    <p id="pontos1">0</p>
+    <button id="BG1" class="botaogol1" data-placar="pontos1">GOLLL!</button>
+</div>
+
+<div id="time2">
+    <h2>time 2</h2>
+    <p id="pontos2">0</p>
+    <button id="BG2" class="botaogol2" data-placar="pontos2">GOLLL!</button>
+</div>
+<div id="reiniciar">
+    <button id="RESET" class="botaoreset">reiniciar</button>
+</div>
+</div>
+
+
+<script>
+    const pontos1 = document.getElementById("pontos1");
+    const pontos2 = document.getElementById("pontos2");
+    const mensagem = document.getElementById("mensagem");
+    const botaoGol1 = document.getElementById("BG1");
+    const botaoGol2 = document.getElementById("BG2");
+    const botaoReset = document.getElementById("RESET");
+
+    function aumentarpontos(placarT) {
+        const pontos = document.getElementById(placarT);
+        let pontosatual = parseInt(pontos.textContent);
+        pontosatual++;
+        pontos.textContent = pontosatual;
+
+        if (pontosatual === 5) {
+            botaoGol1.disabled = true;
+            botaoGol2.disabled = true;
+            mensagem.textContent = `${placarT === 'pontos1' ? 'time 1' : 'time 2'} é o campeão!`;
+        }
+    }
+
+    function reiniciargame() {
+        pontos1.textContent = '0';
+        pontos2.textContent = '0';
+        botaoGol1.disabled = false;
+        botaoGol2.disabled = false;
+        mensagem.textContent = '';
+    }
+
+    botaoGol1.addEventListener("click", function() {
+        aumentarpontos(this.dataset.placar);
+    });
+    botaoGol2.addEventListener("click", function() {
+        aumentarpontos(this.dataset.placar);
+    });
+    botaoReset.addEventListener("click", reiniciargame);
+
+
+
+</script>
+
+</body>
+</html>
